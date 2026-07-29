@@ -1,11 +1,96 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Stats from "../components/Stats.astro";
+import Testimonials from "../components/Testimonials.astro";
+import Timeline from "../components/Timeline.astro";
+import Portfolio from "../components/Portfolio.astro";
+import Blog from "../components/Blog.astro";
+import Contact from "../components/Contact.astro";
+import MapSection from "../components/MapSection.astro";
+import Footer from "../components/Footer.astro";
+import RightNav from "../components/RightNav.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const education = [
+  {
+    title: "Universitas Teknologi",
+    role: "Mahasiswa",
+    period: "2018 - 2022",
+    subheading: "Sarjana Teknik Informatika",
+    desc: "Fokus pada dasar-dasar pemrograman web, arsitektur perangkat lunak, struktur data, dan antarmuka pengguna.",
+  },
+  {
+    title: "Pelatihan Web Developer",
+    role: "Peserta",
+    period: "2021 - 2022",
+    subheading: "Sertifikat Pemrograman Web Fullstack",
+    desc: "Pelatihan mendalam mencakup ekosistem JavaScript (Vue 3, React), Tailwind CSS, REST API, dan integrasi database.",
+  },
+  {
+    title: "Kursus Antarmuka UI/UX",
+    role: "Peserta",
+    period: "2020 - 2021",
+    subheading: "Sertifikat Desain Pengalaman Pengguna",
+    desc: "Mempelajari prinsip dasar hierarki visual, wireframing, prototyping, dan desain sistem modern.",
+  },
+];
+
+const workHistory = [
+  {
+    title: "Lead Web Developer",
+    role: "Pengembang Utama",
+    period: "2023 - Sekarang",
+    subheading: "Studio Produk Digital",
+    desc: "Memimpin arsitektur frontend dan pengembangan sistem komponen menggunakan Vue 3, Astro, dan Supabase.",
+  },
+  {
+    title: "Fullstack Developer",
+    role: "Pengembang Web",
+    period: "2022 - 2023",
+    subheading: "Agensi Teknologi Web",
+    desc: "Membangun dan memelihara aplikasi web klien skala menengah hingga besar dengan integrasi API Laravel.",
+  },
+  {
+    title: "Junior Frontend Developer",
+    role: "Pengembang Frontend",
+    period: "2021 - 2022",
+    subheading: "Startup Teknologi",
+    desc: "Mengimplementasikan desain UI menjadi halaman web responsif yang cepat dan SEO friendly.",
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Rizular — Fullstack Web Developer">
+  <div class="lg:flex">
+    <Sidebar />
+    <main class="flex-1 min-w-0 bg-[#F0F0F6]">
+      <Hero />
+      <Services />
+      <Stats />
+      <Testimonials />
+      <Timeline
+        id="education"
+        eyebrow="Latar Belakang"
+        heading="Pendidikan"
+        intro="Pendidikan formal dan pelatihan profesional yang membentuk keahlian teknis saya."
+        items={education}
+      />
+      <Timeline
+        id="work-history"
+        eyebrow="Pengalaman"
+        heading="Riwayat Pekerjaan"
+        intro="Pengalaman kerja dan proyek yang pernah saya tangani secara profesional."
+        items={workHistory}
+        bg
+      />
+      <Portfolio />
+      <Blog />
+      <Contact />
+      <MapSection />
+      <Footer />
+    </main>
+    <RightNav />
+  </div>
 </Layout>

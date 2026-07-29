@@ -1,0 +1,51 @@
+---
+interface Item {
+  title: string;
+  role?: string;
+  period: string;
+  subheading?: string;
+  desc: string;
+}
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  intro: string;
+  items: Item[];
+  bg?: boolean;
+}
+const { id, eyebrow, heading, intro, items } = Astro.props;
+---
+<section id={id} class="mx-4 lg:mx-8 py-12 lg:py-16">
+  <div class="max-w-2xl mx-auto text-center mb-10">
+    <p class="text-brand text-sm font-medium uppercase tracking-wider mb-2">{eyebrow}</p>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl">{heading}</h2>
+    <p class="mt-3 text-ink-light text-sm leading-relaxed">{intro}</p>
+  </div>
+  
+  <!-- One Big Combined Card Container matching screenshot design with clean typography -->
+  <div class="bg-white rounded-2xl border border-ink/5 shadow-sm p-6 sm:p-10 divide-y divide-ink/10">
+    {items.map((item) => (
+      <div class="grid sm:grid-cols-12 gap-4 sm:gap-8 py-8 first:pt-0 last:pb-0 items-start">
+        <div class="sm:col-span-5">
+          <h3 class="font-display font-semibold text-base sm:text-lg text-ink">{item.title}</h3>
+          <div class="flex items-center gap-3 mt-2.5">
+            <span class="text-sm font-normal text-ink-light">{item.role || "Student"}</span>
+            <span class="bg-brand text-ink font-medium text-[11px] px-2.5 py-0.5 rounded">
+              {item.period}
+            </span>
+          </div>
+        </div>
+
+        <div class="sm:col-span-7">
+          <h4 class="font-display font-semibold text-base text-ink mb-2">
+            {item.subheading || "Certificate Of Web Training"}
+          </h4>
+          <p class="text-sm font-normal text-ink-light leading-relaxed">
+            {item.desc}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

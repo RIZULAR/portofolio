@@ -1,0 +1,13 @@
+---
+const socials = ["Twitter", "GitHub", "LinkedIn", "Instagram"];
+---
+<footer class="mx-4 lg:mx-8 my-6 p-6 bg-white rounded-xl border border-ink/5 shadow-sm">
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-ink-light">
+    <p>&copy; {new Date().getFullYear()} Rizular. Hak Cipta Dilindungi Undang-Undang.</p>
+    <div class="flex gap-5">
+      {socials.map((s) => (
+        <a href="#" class="hover:text-brand transition-colors font-medium">{s}</a>
+      ))}
+    </div>
+  </div>
+</footer>

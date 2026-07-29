@@ -1,0 +1,85 @@
+---
+const plans = [
+  {
+    name: "Silver",
+    price: "0",
+    popular: false,
+    features: [
+      { label: "Desain Antarmuka (UI)", included: true },
+      { label: "Pengembangan Frontend", included: true },
+      { label: "Desain Logo & Identitas", included: false },
+      { label: "Optimasi SEO & Performa", included: false },
+      { label: "Integrasi CMS / Supabase", included: false },
+      { label: "Dukungan 5 Halaman Web", included: false },
+      { label: "Akses Pengguna Tanpa Batas", included: false },
+      { label: "Kapasitas Server 20 GB", included: false },
+    ],
+  },
+  {
+    name: "Gold",
+    price: "50",
+    popular: true,
+    features: [
+      { label: "Desain Antarmuka (UI)", included: true },
+      { label: "Pengembangan Frontend", included: true },
+      { label: "Desain Logo & Identitas", included: true },
+      { label: "Optimasi SEO & Performa", included: true },
+      { label: "Integrasi CMS / Supabase", included: false },
+      { label: "Dukungan 5 Halaman Web", included: false },
+      { label: "Akses Pengguna Tanpa Batas", included: false },
+      { label: "Kapasitas Server 20 GB", included: false },
+    ],
+  },
+  {
+    name: "Diamond",
+    price: "80",
+    popular: false,
+    features: [
+      { label: "Desain Antarmuka (UI)", included: true },
+      { label: "Pengembangan Frontend", included: true },
+      { label: "Desain Logo & Identitas", included: true },
+      { label: "Optimasi SEO & Performa", included: true },
+      { label: "Integrasi CMS / Supabase", included: true },
+      { label: "Dukungan 5 Halaman Web", included: true },
+      { label: "Akses Pengguna Tanpa Batas", included: true },
+      { label: "Kapasitas Server 20 GB", included: true },
+    ],
+  },
+];
+---
+<section id="pricing" class="mx-4 lg:mx-8 py-12 lg:py-16">
+  <div class="max-w-2xl mx-auto text-center mb-10">
+    <p class="text-brand text-sm font-medium uppercase tracking-wider mb-2">Tarif & Paket</p>
+    <h2 class="font-display font-semibold text-2xl sm:text-3xl">Paket Harga Layanan</h2>
+    <p class="mt-3 text-ink-light text-sm leading-relaxed">
+      Pilihan harga yang transparan dan fleksibel untuk berbagai kebutuhan proyek Anda.
+    </p>
+  </div>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+    {plans.map((p) => (
+      <div class={`rounded-xl bg-white p-6 text-center border ${p.popular ? "border-brand shadow-xl lg:-translate-y-3" : "border-ink/5 shadow-sm"}`}>
+        {p.popular && <span class="inline-block bg-brand text-white text-xs font-medium px-3 py-1 rounded-full mb-3">Paling Populer</span>}
+        <h3 class="font-display font-semibold text-lg">{p.name}</h3>
+        <p class="mt-3 font-display font-semibold text-3xl">
+          ${p.price}<span class="text-sm font-normal text-ink-light">/jam</span>
+        </p>
+        <p class="mt-2 text-xs text-ink-light">Cocok untuk bisnis yang ingin mengoptimalkan performa web</p>
+        <ul class="mt-6 space-y-3 text-sm text-left">
+          {p.features.map((f) => (
+            <li class="flex items-center gap-2">
+              {f.included ? (
+                <svg class="w-4 h-4 text-brand shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              ) : (
+                <svg class="w-4 h-4 text-ink/30 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              )}
+              <span class={f.included ? "" : "text-ink-light/70"}>{f.label}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="#contact" class={`mt-6 inline-flex w-full items-center justify-center text-sm font-medium py-3 rounded transition-colors ${p.popular ? "bg-brand text-white hover:bg-amber-500" : "border border-ink/20 hover:border-brand hover:text-brand"}`}>
+          Pesan Sekarang
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
