@@ -1,12 +1,12 @@
 ---
 const posts = [
-  { title: "Cara Membangun Template Web Reusable dengan Astro v5", desc: "Panduan praktis menyusun komponen modular untuk mempercepat pembuatan aplikasi web.", color: "from-indigo-500 to-violet-600" },
-  { title: "Panduan Desain Kartu Bisnis & Branding Modern", desc: "Mengatur hierarki tipografi dan margin warna agar kartu nama tampil elegan.", color: "from-rose-400 to-red-400" },
-  { title: "Optimasi Performa Frontend Menggunakan Tailwind CSS v4", desc: "Tips meningkatkan skor Lighthouse dan kecepatan render antarmuka pengguna.", color: "from-neutral-700 to-neutral-900" },
+  { title: "Membangun Dashboard Realtime dengan Vue 3 & Supabase", desc: "Cara setup subscription realtime, Row Level Security, dan optimasi query PostgreSQL untuk aplikasi web modern.", color: "from-sky-500 to-cyan-600" },
+  { title: "Arsitektur Komponen Scalable di Astro + Vue", desc: "Strategi memecah UI menjadi komponen reusable, mengatur props, dan mengelola state antar island di Astro.", color: "from-violet-500 to-purple-600" },
+  { title: "Optimalkan Skor Lighthouse ke 95+ di Proyek Laravel", desc: "Teknik lazy loading, image optimization, critical CSS, dan caching yang efektif untuk performa produksi terbaik.", color: "from-emerald-500 to-teal-600" },
 ];
 ---
 <section id="blog" class="mx-4 lg:mx-8 py-12 lg:py-16">
-  <div class="max-w-2xl mx-auto text-center mb-10">
+  <div class="max-w-2xl mx-auto text-center mb-10" data-aos="fade-up">
     <p class="text-brand text-sm font-medium uppercase tracking-wider mb-2">Artikel & Catatan</p>
     <h2 class="font-display font-semibold text-2xl sm:text-3xl">Blog Terbaru</h2>
     <p class="mt-3 text-ink-light text-sm leading-relaxed">
@@ -14,8 +14,8 @@ const posts = [
     </p>
   </div>
   <div class="grid sm:grid-cols-3 gap-6">
-    {posts.map((p) => (
-      <article class="bg-white rounded-xl overflow-hidden border border-ink/5 shadow-sm">
+    {posts.map((p, idx) => (
+      <article class="bg-white rounded-xl overflow-hidden border border-ink/5 shadow-sm" data-aos="fade-up" data-aos-delay={(idx + 1) * 100}>
         <div class={`h-36 bg-gradient-to-br ${p.color}`}></div>
         <div class="p-5">
           <h3 class="font-display font-semibold text-base mb-2">{p.title}</h3>

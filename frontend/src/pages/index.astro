@@ -4,7 +4,6 @@ import Sidebar from "../components/Sidebar.astro";
 import Hero from "../components/Hero.astro";
 import Services from "../components/Services.astro";
 import Stats from "../components/Stats.astro";
-import Testimonials from "../components/Testimonials.astro";
 import Timeline from "../components/Timeline.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Blog from "../components/Blog.astro";
@@ -15,49 +14,44 @@ import RightNav from "../components/RightNav.astro";
 
 const education = [
   {
-    title: "Universitas Teknologi",
-    role: "Mahasiswa",
-    period: "2018 - 2022",
-    subheading: "Sarjana Teknik Informatika",
-    desc: "Fokus pada dasar-dasar pemrograman web, arsitektur perangkat lunak, struktur data, dan antarmuka pengguna.",
+    title: "Universitas Amikom Yogyakarta (Sedang Berlangsung)",
+    role: "Mahasiswa Aktif",
+    period: "2023 - Sekarang",
+    subheading: "S1 Informatika — Semester 6",
+    desc: "Fokus pada rekayasa perangkat lunak, pemrograman web fullstack, basis data, dan jaringan komputer. Aktif mengerjakan proyek nyata sebagai bagian dari persiapan karir.",
   },
   {
-    title: "Pelatihan Web Developer",
-    role: "Peserta",
-    period: "2021 - 2022",
-    subheading: "Sertifikat Pemrograman Web Fullstack",
-    desc: "Pelatihan mendalam mencakup ekosistem JavaScript (Vue 3, React), Tailwind CSS, REST API, dan integrasi database.",
-  },
-  {
-    title: "Kursus Antarmuka UI/UX",
-    role: "Peserta",
-    period: "2020 - 2021",
-    subheading: "Sertifikat Desain Pengalaman Pengguna",
-    desc: "Mempelajari prinsip dasar hierarki visual, wireframing, prototyping, dan desain sistem modern.",
+    title: "SMAN 3 Kota Serang",
+    role: "Siswa",
+    period: "2020 - 2023",
+    subheading: "MIPA (Matematika dan Ilmu Pengetahuan Alam)",
+    desc: "Lulus jurusan MIPA dengan minat tinggi pada logika matematika, sains, dan pemrograman komputer.",
   },
 ];
 
 const workHistory = [
   {
-    title: "Lead Web Developer",
-    role: "Pengembang Utama",
-    period: "2023 - Sekarang",
-    subheading: "Studio Produk Digital",
-    desc: "Memimpin arsitektur frontend dan pengembangan sistem komponen menggunakan Vue 3, Astro, dan Supabase.",
+    title: "🏆 Juara Best Research — Hackathon 2026",
+    role: "Kompetisi Hackathon",
+    period: "2026",
+    subheading: "Sistem Konversi Nilai & SKS Magang",
+    desc: "Membangun sistem informasi berbasis web untuk otomatisasi konversi kegiatan magang mahasiswa ke dalam nilai mata kuliah dan SKS akademik, dilengkapi dengan dashboard admin dan verifikasi dosen.",
+    image: "/HACKATON.jpeg",
+  },
+  {
+    title: "Platform AIR.IN — ITFEST 2026",
+    role: "Kompetisi ITFEST 2026",
+    period: "2026",
+    subheading: "Platform Monitoring & Rekomendasi Irigasi Presisi",
+    desc: "Membangun platform web fullstack untuk pemantauan ketersediaan air lahan pertanian berbasis AI, peta interaktif GIS (Leaflet), integrasi cuaca realtime, dan manajemen alokasi air otomatis.",
+    image: "/airin_preview.png",
   },
   {
     title: "Fullstack Developer",
-    role: "Pengembang Web",
-    period: "2022 - 2023",
-    subheading: "Agensi Teknologi Web",
-    desc: "Membangun dan memelihara aplikasi web klien skala menengah hingga besar dengan integrasi API Laravel.",
-  },
-  {
-    title: "Junior Frontend Developer",
-    role: "Pengembang Frontend",
-    period: "2021 - 2022",
-    subheading: "Startup Teknologi",
-    desc: "Mengimplementasikan desain UI menjadi halaman web responsif yang cepat dan SEO friendly.",
+    role: "Tugas Kuliah",
+    period: "2026",
+    subheading: "Sistem Magang Integrasi",
+    desc: "Membangun platform sistem informasi magang terintegrasi berbasis Vue 3 dan Laravel sebagai proyek tugas kuliah, mencakup alur pendaftaran, pengajuan proposal, dan evaluasi mahasiswa.",
   },
 ];
 ---
@@ -69,7 +63,6 @@ const workHistory = [
       <Hero />
       <Services />
       <Stats />
-      <Testimonials />
       <Timeline
         id="education"
         eyebrow="Latar Belakang"
@@ -79,9 +72,9 @@ const workHistory = [
       />
       <Timeline
         id="work-history"
-        eyebrow="Pengalaman"
-        heading="Riwayat Pekerjaan"
-        intro="Pengalaman kerja dan proyek yang pernah saya tangani secara profesional."
+        eyebrow="Proyek & Prestasi"
+        heading="Proyek & Pencapaian"
+        intro="Proyek nyata yang pernah saya bangun dan kompetisi yang pernah saya ikuti."
         items={workHistory}
         bg
       />
