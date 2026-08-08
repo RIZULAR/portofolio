@@ -40,8 +40,8 @@ const navItems = [
           class:list={[
             "right-nav-btn w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200",
             idx === 0
-              ? "bg-brand text-ink font-bold shadow-md shadow-brand/30"
-              : "bg-surface text-ink-light hover:bg-brand hover:text-ink"
+              ? "bg-brand text-white shadow-md shadow-brand/30"
+              : "bg-surface text-ink-light hover:bg-brand hover:text-white"
           ]}
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -60,8 +60,8 @@ const navItems = [
     const navBtns = document.querySelectorAll<HTMLAnchorElement>('.right-nav-btn');
     if (!navBtns.length) return;
 
-    const activeClasses = ['bg-brand', 'text-ink', 'font-bold', 'shadow-md', 'shadow-brand/30'];
-    const inactiveClasses = ['bg-surface', 'text-ink-light', 'hover:bg-brand', 'hover:text-ink'];
+    const activeClasses = ['bg-brand', 'text-white', 'shadow-md', 'shadow-brand/30'];
+    const inactiveClasses = ['bg-surface', 'text-ink-light', 'hover:bg-brand', 'hover:text-white'];
 
     let isClickScrolling = false;
     let clickTimeout: number | undefined;

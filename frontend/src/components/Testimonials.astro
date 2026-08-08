@@ -22,7 +22,7 @@ const reviews = [
 ---
 <section class="mx-4 lg:mx-8 py-12 lg:py-16">
   <div class="max-w-2xl mx-auto text-center mb-10">
-    <p class="text-amber-700 text-sm font-semibold uppercase tracking-wider mb-2">Testimoni Klien</p>
+    <p class="text-brand text-sm font-medium uppercase tracking-wider mb-2">Testimoni Klien</p>
     <h2 class="font-display font-semibold text-2xl sm:text-3xl">Rekomendasi & Ulasan</h2>
     <p class="mt-3 text-ink-light text-sm leading-relaxed">
       Apa kata mitra dan klien setelah bekerja sama dengan saya pada proyek nyata.
@@ -31,7 +31,7 @@ const reviews = [
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {reviews.map((r) => (
       <div class="bg-white border border-ink/5 shadow-sm rounded-xl p-6">
-        <div class="text-amber-500 text-sm mb-3" aria-label="Rating 5 bintang">★★★★★</div>
+        <div class="text-brand text-sm mb-3">★★★★★</div>
         <h3 class="font-display font-semibold text-base mb-2">{r.title}</h3>
         <p class="text-sm text-ink-light leading-relaxed">{r.text}</p>
         <div class="mt-5 flex items-center gap-3">
