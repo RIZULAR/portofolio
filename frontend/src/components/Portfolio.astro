@@ -1,9 +1,9 @@
 ---
 const categories = ["Semua", "Frontend", "Fullstack", "UI/UX", "Open Source"];
 const items = [
+  { title: "Sistem Informasi & Integrasi Magang (Magista)", cat: "Fullstack", color: "from-violet-500 to-purple-600", tech: "Team Project · Fullstack · Vue 3 · Laravel", image: "/magista.png" },
   { title: "AIR.IN — Platform Irigasi (ITFEST 2026)", cat: "Fullstack", color: "from-sky-400 to-cyan-500", tech: "Kompetisi ITFEST 2026 · Vue 3 · Supabase", image: "/airin_preview.png", link: "https://itfest-air-in.vercel.app" },
   { title: "Sistem Konversi SKS Magang (Best Research)", cat: "Fullstack", color: "from-amber-400 to-amber-600", tech: "Juara Best Research Hackathon 2024", image: "/HACKATON.jpeg", link: "https://github.com/RIZULAR/HACKATON" },
-  { title: "Sistem Magang Integrasi (Tugas Kuliah)", cat: "Fullstack", color: "from-violet-500 to-purple-600", tech: "Tugas Kuliah · Vue 3 · Laravel" },
   { title: "Portofolio Personal Rizular", cat: "Frontend", color: "from-brand to-amber-400", tech: "Astro · Vue · Tailwind CSS" },
   { title: "Landing Page Produk SaaS", cat: "Frontend", color: "from-slate-700 to-slate-900", tech: "Astro · Tailwind CSS" },
   { title: "Sistem Informasi Akademik", cat: "Fullstack", color: "from-emerald-400 to-teal-500", tech: "Laravel · Inertia.js · Vue" },
@@ -22,7 +22,11 @@ const items = [
   </div>
   <div class="flex flex-wrap justify-center gap-2 mb-8 text-sm" data-aos="fade-up" data-aos-delay="100">
     {categories.map((c, i) => (
-      <button class={`px-4 py-1.5 rounded-full border transition-colors ${i === 0 ? "bg-brand text-white border-brand font-medium" : "border-ink/15 text-ink-light hover:border-brand hover:text-brand"}`}>
+      <button
+        aria-label={`Filter portofolio: ${c}`}
+        aria-pressed={i === 0}
+        class={`px-4 py-1.5 rounded-full border transition-colors ${i === 0 ? "bg-brand text-white border-brand font-medium" : "border-ink/15 text-ink-light hover:border-brand hover:text-brand"}`}
+      >
         {c}
       </button>
     ))}
@@ -39,7 +43,7 @@ const items = [
           data-aos-delay={(idx % 3) * 100}
         >
           {it.image ? (
-            <img src={it.image} alt={it.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            <img src={it.image} alt={it.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="400" height="400" loading="lazy" decoding="async" />
           ) : (
             <div class={`absolute inset-0 bg-gradient-to-br ${it.color}`}></div>
           )}

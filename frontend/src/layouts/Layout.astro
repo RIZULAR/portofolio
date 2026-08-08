@@ -2,37 +2,65 @@
 import "../styles/global.css";
 interface Props {
   title: string;
+  description?: string;
 }
-const { title } = Astro.props;
+const {
+  title,
+  description = "Portofolio resmi Rizqi Zulmiazta Albar — Fullstack Web Developer dari Yogyakarta. Spesialisasi Vue 3, Astro, Laravel, dan Supabase.",
+} = Astro.props;
 ---
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#FDB714" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <!-- Preload hero image (LCP) -->
+    <link rel="preload" as="image" href="/Albar.png" fetchpriority="high" />
+    <!-- Preload Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
+    <!-- Minimal AOS critical CSS inlined to prevent CLS -->
+    <style>
+      [data-aos] { pointer-events: none; }
+      [data-aos].aos-animate { pointer-events: auto; }
+      [data-aos="fade-up"] { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+      [data-aos="fade-right"] { opacity: 0; transform: translateX(-20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+      [data-aos="fade-left"] { opacity: 0; transform: translateX(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+      [data-aos].aos-animate { opacity: 1; transform: translate(0); }
+    </style>
   </head>
   <body class="bg-[#F0F0F6] text-ink antialiased">
     <slot />
-    <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- AOS JS loaded async to not block rendering -->
     <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (typeof AOS !== "undefined") {
-          AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50,
-          });
-        }
-      });
+      (function() {
+        var script = document.createElement('script');
+        script.src = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
+        script.onload = function() {
+          AOS.init({ duration: 800, once: true, offset: 50 });
+        };
+        document.body.appendChild(script);
+      })();
     </script>
   </body>
 </html>

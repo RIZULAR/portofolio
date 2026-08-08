@@ -63,7 +63,7 @@ const { id, eyebrow, heading, intro, items } = Astro.props;
           )}
           {item.image && (
             <div class="mt-4 rounded-xl overflow-hidden border border-ink/10 shadow-sm max-w-md bg-surface">
-              <img src={item.image} alt={item.title} class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300" />
+              <img src={item.image} alt={item.title} class="w-full h-auto object-cover hover:scale-105 transition-transform duration-300" width="600" height="400" loading="lazy" decoding="async" />
             </div>
           )}
         </div>
