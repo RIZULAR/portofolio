@@ -51,16 +51,24 @@ const {
   </head>
   <body class="bg-[#F0F0F6] text-ink antialiased">
     <slot />
-    <!-- AOS JS loaded async to not block rendering -->
+    <!-- Native zero-dependency scroll reveal animation -->
     <script is:inline>
-      (function() {
-        var script = document.createElement('script');
-        script.src = 'https://unpkg.com/aos@2.3.4/dist/aos.js';
-        script.onload = function() {
-          AOS.init({ duration: 800, once: true, offset: 50 });
-        };
-        document.body.appendChild(script);
-      })();
+      document.addEventListener("DOMContentLoaded", function() {
+        var elements = document.querySelectorAll("[data-aos]");
+        if ("IntersectionObserver" in window) {
+          var observer = new IntersectionObserver(function(entries, obs) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("aos-animate");
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.05, rootMargin: "0px 0px -30px 0px" });
+          elements.forEach(function(el) { observer.observe(el); });
+        } else {
+          elements.forEach(function(el) { el.classList.add("aos-animate"); });
+        }
+      });
     </script>
   </body>
 </html>
