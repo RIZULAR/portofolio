@@ -1,0 +1,9 @@
+{
+  "title": "Sistem Informasi & Integrasi Magang (Magista)",
+  "cat": "Fullstack",
+  "color": "from-violet-500 to-purple-600",
+  "tech": "Team Project · Fullstack · Vue 3 · Laravel",
+  "image": "/magista.webp",
+  "link": "https://magista.web.id",
+  "order": 1
+}

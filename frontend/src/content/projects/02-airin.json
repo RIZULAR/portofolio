@@ -1,0 +1,9 @@
+{
+  "title": "AIR.IN — Platform Irigasi (ITFEST 2026)",
+  "cat": "Fullstack",
+  "color": "from-sky-400 to-cyan-500",
+  "tech": "Kompetisi ITFEST 2026 · Vue 3 · Supabase",
+  "image": "/airin_preview.webp",
+  "link": "https://itfest-air-in.vercel.app",
+  "order": 2
+}

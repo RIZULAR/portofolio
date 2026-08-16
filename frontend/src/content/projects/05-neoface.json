@@ -1,0 +1,9 @@
+{
+  "title": "NeoFace — Smart Lighting & Face Detection",
+  "cat": "IoT & AI",
+  "color": "from-cyan-500 to-blue-600",
+  "tech": "ESP32-CAM · Python · MediaPipe · IoT",
+  "image": "/neoface.png",
+  "link": "https://github.com/RIZULAR/neoface",
+  "order": 5
+}

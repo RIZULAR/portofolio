@@ -8,7 +8,6 @@ import Timeline from "../components/Timeline.astro";
 import Portfolio from "../components/Portfolio.astro";
 import Blog from "../components/Blog.astro";
 import Contact from "../components/Contact.astro";
-import MapSection from "../components/MapSection.astro";
 import Footer from "../components/Footer.astro";
 import RightNav from "../components/RightNav.astro";
 
@@ -53,6 +52,7 @@ const workHistory = [
     subheading: "Sistem Informasi & Integrasi Magang (Magista)",
     desc: "Mengembangkan platform sistem informasi magang terintegrasi berbasis Vue 3 dan Laravel dalam tim. Bertanggung jawab pada implementasi REST API backend, autentikasi multi-role (Mahasiswa, Dosen, Admin), modul pengajuan proposal, dan dashboard pemantauan kegiatan.",
     image: "/magista.webp",
+    link: "https://magista.web.id",
   },
 ];
 ---
@@ -82,7 +82,6 @@ const workHistory = [
       <Portfolio />
       <Blog />
       <Contact />
-      <MapSection />
       <Footer />
     </main>
     <RightNav />

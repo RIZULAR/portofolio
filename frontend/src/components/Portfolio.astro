@@ -1,16 +1,13 @@
 ---
-const categories = ["Semua", "Frontend", "Fullstack", "UI/UX", "Open Source"];
-const items = [
-  { title: "Sistem Informasi & Integrasi Magang (Magista)", cat: "Fullstack", color: "from-violet-500 to-purple-600", tech: "Team Project · Fullstack · Vue 3 · Laravel", image: "/magista.webp" },
-  { title: "AIR.IN — Platform Irigasi (ITFEST 2026)", cat: "Fullstack", color: "from-sky-400 to-cyan-500", tech: "Kompetisi ITFEST 2026 · Vue 3 · Supabase", image: "/airin_preview.webp", link: "https://itfest-air-in.vercel.app" },
-  { title: "Sistem Konversi SKS Magang (Best Research)", cat: "Fullstack", color: "from-amber-400 to-amber-600", tech: "Juara Best Research Hackathon 2024", image: "/HACKATON.webp", link: "https://github.com/RIZULAR/HACKATON" },
-  { title: "Portofolio Personal Rizular", cat: "Frontend", color: "from-brand to-amber-400", tech: "Astro · Vue · Tailwind CSS" },
-  { title: "Landing Page Produk SaaS", cat: "Frontend", color: "from-slate-700 to-slate-900", tech: "Astro · Tailwind CSS" },
-  { title: "Sistem Informasi Akademik", cat: "Fullstack", color: "from-emerald-400 to-teal-500", tech: "Laravel · Inertia.js · Vue" },
-  { title: "UI Kit Komponen Vue 3", cat: "Open Source", color: "from-rose-400 to-pink-500", tech: "Vue 3 · TypeScript · Storybook" },
-  { title: "Desain Sistem E-Commerce", cat: "UI/UX", color: "from-orange-400 to-amber-500", tech: "Figma · Design System" },
-  { title: "REST API Manajemen Konten", cat: "Fullstack", color: "from-blue-500 to-indigo-600", tech: "Laravel · PostgreSQL · JWT" },
-];
+import { getCollection } from 'astro:content';
+
+const rawProjects = await getCollection('projects');
+const items = rawProjects
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .map(item => item.data);
+
+// Dapatkan daftar kategori unik dari data proyek secara dinamis
+const dynamicCategories = ["Semua", ...new Set(items.map(it => it.cat).filter(Boolean))];
 ---
 <section id="portfolio" class="mx-4 lg:mx-8 py-12 lg:py-16">
   <div class="max-w-2xl mx-auto text-center mb-8" data-aos="fade-up">
@@ -20,30 +17,49 @@ const items = [
       Proyek nyata yang pernah saya bangun — dari aplikasi fullstack, dashboard, hingga landing page profesional.
     </p>
   </div>
-  <div class="flex flex-wrap justify-center gap-2 mb-8 text-sm" data-aos="fade-up" data-aos-delay="100">
-    {categories.map((c, i) => (
+  
+  <!-- Category Filter Buttons -->
+  <div class="flex flex-wrap justify-center gap-2 mb-8 text-sm" data-aos="fade-up" data-aos-delay="100" id="portfolio-filter-container">
+    {dynamicCategories.map((c, i) => (
       <button
+        type="button"
+        data-filter={c}
         aria-label={`Filter portofolio: ${c}`}
-        aria-pressed={i === 0}
-        class={`px-4 py-1.5 rounded-full border transition-colors ${i === 0 ? "bg-brand text-white border-brand font-medium" : "border-ink/15 text-ink-light hover:border-brand hover:text-brand"}`}
+        aria-pressed={i === 0 ? "true" : "false"}
+        class={`portfolio-filter-btn px-4 py-1.5 rounded-full border transition-all cursor-pointer ${
+          i === 0 
+            ? "bg-brand text-white border-brand font-medium shadow-sm" 
+            : "border-ink/15 text-ink-light hover:border-brand hover:text-brand bg-white"
+        }`}
       >
         {c}
       </button>
     ))}
   </div>
-  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+  <!-- Project Grid -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="portfolio-grid">
     {items.map((it, idx) => {
       const CardTag = it.link ? 'a' : 'div';
       const linkProps = it.link ? { href: it.link, target: '_blank', rel: 'noopener noreferrer' } : {};
       return (
         <CardTag
           {...linkProps}
-          class="group relative aspect-square rounded-xl overflow-hidden border border-ink/5 shadow-sm bg-white block cursor-pointer"
+          data-category={it.cat}
+          class="portfolio-card group relative aspect-square rounded-xl overflow-hidden border border-ink/5 shadow-sm bg-white block cursor-pointer transition-all duration-300"
           data-aos="fade-up"
           data-aos-delay={(idx % 3) * 100}
         >
           {it.image ? (
-            <img src={it.image} alt={it.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="400" height="400" loading="lazy" decoding="async" />
+            <img 
+              src={it.image} 
+              alt={it.title} 
+              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
+              width="400" 
+              height="400" 
+              loading="lazy" 
+              decoding="async" 
+            />
           ) : (
             <div class={`absolute inset-0 bg-gradient-to-br ${it.color}`}></div>
           )}
@@ -68,3 +84,51 @@ const items = [
     })}
   </div>
 </section>
+
+<script>
+  function setupPortfolioFilter() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.portfolio-filter-btn');
+    const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
+
+    if (!filterButtons.length || !cards.length) return;
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selectedCategory = btn.getAttribute('data-filter');
+
+        // Update active styling on buttons
+        filterButtons.forEach((b) => {
+          b.classList.remove('bg-brand', 'text-white', 'border-brand', 'font-medium', 'shadow-sm');
+          b.classList.add('border-ink/15', 'text-ink-light', 'bg-white');
+          b.setAttribute('aria-pressed', 'false');
+        });
+
+        btn.classList.add('bg-brand', 'text-white', 'border-brand', 'font-medium', 'shadow-sm');
+        btn.classList.remove('border-ink/15', 'text-ink-light', 'bg-white');
+        btn.setAttribute('aria-pressed', 'true');
+
+        // Filter cards with smooth fade
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (selectedCategory === 'Semua' || cardCategory === selectedCategory) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 250);
+          }
+        });
+      });
+    });
+  }
+
+  // Run on initial load and after Astro page transitions
+  setupPortfolioFilter();
+  document.addEventListener('astro:page-load', setupPortfolioFilter);
+</script>

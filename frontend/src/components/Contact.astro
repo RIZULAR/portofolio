@@ -5,31 +5,65 @@
     <div class="bg-white p-6 sm:p-8 rounded-xl border border-ink/5 shadow-sm" data-aos="fade-right">
       <p class="text-brand text-sm font-medium uppercase tracking-wider mb-2">Kirim Pesan</p>
       <h2 class="font-display font-semibold text-2xl sm:text-3xl mb-6">Hubungi Saya Langsung</h2>
-      <form class="space-y-4" aria-label="Formulir kontak">
+      
+      <!-- Feedback Alert Notification -->
+      <div id="contact-feedback" class="hidden mb-4 p-4 rounded-lg text-sm transition-all" role="alert"></div>
+
+      <form id="contact-form" class="space-y-4" aria-label="Formulir kontak">
         <div class="grid sm:grid-cols-2 gap-4">
           <div>
             <label for="contact-name" class="sr-only">Nama Lengkap</label>
-            <input id="contact-name" name="name" type="text" placeholder="Nama Lengkap Anda (Wajib)" required
-              class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" />
+            <input 
+              id="contact-name" 
+              name="name" 
+              type="text" 
+              placeholder="Nama Lengkap Anda (Wajib)" 
+              required
+              class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" 
+            />
           </div>
           <div>
             <label for="contact-email" class="sr-only">Email</label>
-            <input id="contact-email" name="email" type="email" placeholder="Email Anda (Wajib)" required
-              class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" />
+            <input 
+              id="contact-email" 
+              name="email" 
+              type="email" 
+              placeholder="Email Anda (Wajib)" 
+              required
+              class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" 
+            />
           </div>
         </div>
         <div>
           <label for="contact-subject" class="sr-only">Subjek Pesan</label>
-          <input id="contact-subject" name="subject" type="text" placeholder="Subjek Pesan"
-            class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" />
+          <input 
+            id="contact-subject" 
+            name="subject" 
+            type="text" 
+            placeholder="Subjek Pesan (Contoh: Tawaran Magang / Diskusi Proyek)" 
+            class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface" 
+          />
         </div>
         <div>
           <label for="contact-message" class="sr-only">Pesan</label>
-          <textarea id="contact-message" name="message" placeholder="Pesan Anda" rows="5"
-            class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface"></textarea>
+          <textarea 
+            id="contact-message" 
+            name="message" 
+            placeholder="Tuliskan pesan Anda di sini..." 
+            rows="5" 
+            required
+            class="w-full border border-ink/15 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand bg-surface"
+          ></textarea>
         </div>
-        <button type="submit" class="bg-brand text-ink text-sm font-bold tracking-wider uppercase px-8 py-3.5 rounded-lg hover:bg-amber-500 transition-colors shadow-md shadow-brand/20">
-          KIRIM PESAN
+        <button 
+          id="contact-submit-btn" 
+          type="submit" 
+          class="inline-flex items-center justify-center gap-2 bg-brand text-ink text-sm font-bold tracking-wider uppercase px-8 py-3.5 rounded-lg hover:bg-amber-500 transition-all shadow-md shadow-brand/20 cursor-pointer disabled:opacity-50"
+        >
+          <span id="btn-text">KIRIM PESAN</span>
+          <svg id="btn-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </button>
       </form>
     </div>
@@ -53,7 +87,7 @@
           </div>
           <div class="text-sm">
             <p class="text-ink-light">Email</p>
-            <p class="font-medium text-ink">rizqizulmiaztaalbar1@gmail.com</p>
+            <a href="mailto:rizqizulmiaztaalbar1@gmail.com" class="font-medium text-ink hover:text-brand transition-colors">rizqizulmiaztaalbar1@gmail.com</a>
           </div>
         </div>
         <div class="flex gap-4 items-start">
@@ -69,3 +103,51 @@
     </div>
   </div>
 </section>
+
+<script>
+  function setupContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const feedback = document.getElementById('contact-feedback');
+    const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement | null;
+    const btnText = document.getElementById('btn-text');
+
+    if (!form || !feedback || !submitBtn || !btnText) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const name = (formData.get('name') as string) || '';
+      const email = (formData.get('email') as string) || '';
+      const subject = (formData.get('subject') as string) || 'Pesan dari Portofolio';
+      const message = (formData.get('message') as string) || '';
+
+      // Tampilkan status loading
+      submitBtn.disabled = true;
+      btnText.textContent = 'MENGIRIM...';
+      feedback.className = 'mb-4 p-4 rounded-lg text-sm bg-amber-50 text-amber-800 border border-amber-200 block';
+      feedback.textContent = 'Mempersiapkan pesan Anda...';
+
+      // Format pesan untuk WhatsApp fallback
+      const waText = encodeURIComponent(
+        `Halo Rizular,\n\nNama: ${name}\nEmail: ${email}\nSubjek: ${subject}\n\nPesan:\n${message}`
+      );
+      const waUrl = `https://wa.me/6281325606084?text=${waText}`;
+
+      // Buka WhatsApp dengan pesan yang sudah terisi otomatis
+      setTimeout(() => {
+        feedback.className = 'mb-4 p-4 rounded-lg text-sm bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+        feedback.innerHTML = `✓ Pesan Anda telah siap! Mengalihkan ke WhatsApp untuk pengiriman instan. <br/><a href="${waUrl}" target="_blank" class="underline font-semibold mt-1 inline-block">Klik di sini jika WhatsApp tidak terbuka otomatis &rarr;</a>`;
+        
+        window.open(waUrl, '_blank');
+        form.reset();
+        submitBtn.disabled = false;
+        btnText.textContent = 'KIRIM PESAN';
+      }, 600);
+    });
+  }
+
+  setupContactForm();
+  document.addEventListener('astro:page-load', setupContactForm);
+</script>
+
